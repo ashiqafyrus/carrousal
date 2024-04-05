@@ -1,0 +1,208 @@
+{% extends "navbar.html" %}
+{% block content %}
+{% load static %}
+<style>
+   .content-container {
+        display: grid;
+        place-items: center;
+        padding: 20px;
+        margin-bottom: 100px; /* Adjusted bottom margin to prevent overlap with the footer */
+        max-width: 1200px; /* Set maximum width for the container */
+        margin: 0 auto; /* Center the container horizontally */
+    }
+
+    .content {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two equal columns */
+        gap: 20px; /* Gap between columns */
+        max-width: 800px;
+        text-align: justify; /* Justify text */
+        background-color: #f9f9f9; /* Background color for content */
+        border-radius: 10px; /* Rounded corners */
+        padding: 20px; /* Padding for content */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow */
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition effect */
+        position: relative; /* Added for pseudo-element positioning */
+        overflow: hidden; /* Hide overflowing pseudo-element */
+    }
+    .content:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.1); /* Overlay background color */
+        z-index: 1;
+        opacity: 0; /* Initially hidden */
+        transition: opacity 0.3s ease; /* Transition effect */
+    }
+    .content:hover:before {
+        opacity: 1; /* Show overlay on hover */
+    }
+
+    .content:hover {
+        transform: translateY(-5px); /* Move content up on hover */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Larger box shadow on hover */
+    }
+    .content:hover img {
+        transform: scale(1.05); /* Scale up image on hover */
+    }
+    h1 {
+        font-size: 32px;
+        color: #333;
+        margin-bottom: 10px; /* Added bottom margin for better spacing */
+        z-index: 2; /* Ensure text is above pseudo-element */
+    }
+
+    p {
+        font-size: 18px;
+        color: #666;
+        line-height: 1.6;
+        z-index: 2; /* Ensure text is above pseudo-element */
+    }
+    .custom-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px; /* Rounded corners for images */
+        transition: transform 0.3s ease; /* Transition effect for image scaling */
+        z-index: 2; /* Ensure image is above pseudo-element */
+    }
+
+    .image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden; /* Hide overflowing image */
+        border-radius: 10px; /* Rounded corners for image container */
+    }
+
+    /* Animation */
+    .content-container {
+        opacity: 0;
+        animation: fade-in 1s ease forwards;
+    }
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Adjust animation delay for each content item */
+    .content:nth-child(odd) {
+        animation-delay: 0.5s;
+    }
+
+    .content:nth-child(even) {
+        animation-delay: 1s;
+    }
+    .block {
+        background-image: url('{% static "images/f.avif" %}');
+        background-size: cover;
+        background-position: center;
+        color: #fff;
+        padding: 50px 20px;
+        text-align: center;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        position: relative;
+        animation: fadeInBlock 1s ease forwards, scaleBlock 6s ease-in-out infinite; 
+    }
+    .block::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      
+        border-radius: 10px;
+    }
+    .block h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    .block p {
+    color: rgba(40, 61, 220, 0.9); /* Adjust text color for better visibility */
+    margin-bottom: 20px; /* Add some bottom margin for better spacing */
+}
+
+    @keyframes fadeInBlock {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    @keyframes scaleBlock {
+    0%, 100% {
+        transform: scale(1); /* Start and end with normal scale */
+    }
+    50% {
+        transform: scale(1.1); /* Scale up by 10% at midpoint */
+    }
+}
+</style>
+<div class="block">
+    <h1>FEATURES</h1>
+    <p>Discover the amazing features of our product</p>
+</div>
+<div class="content-container">
+  
+    <div class="content">
+        <div>
+            <h1>Drastic Reduction in Audit Cycle Time</h1>
+            <p>From the effortless generation of Schedule III statements to automated Ageing & Ratios to automated Ledger Scrutiny, AssureAI, the leading audit software for chartered accountants in India, ensures the completion of tasks in just a fraction of the time, saving 70 to 90% of the time and effort.</p>
+        </div>
+        <div class="image-container">
+            <img src="{% static 'images/feature1.avif' %}" class="custom-image">
+        </div>
+    </div>
+    <div class="content">
+        <div class="image-container">
+            <img src="{% static 'images/features2.avif' %}" class="custom-image">
+        </div>
+        <div>
+            <h1>Eliminate Data Entry and Consequent Errors</h1>
+            <p>With single-click import of the entire books of accounts into the cloud platform and in-built validation checks, AssureAI, the top auditing software in India, eliminates data entry at multiple points and carries the data seamlessly from the source to the destination without any room for manual tampering, thereby removing the possibility of errors.</p>
+        </div>
+    </div>
+    <div class="content">
+        <div>
+            <h1>Empower Team</h1>
+            <p>With most mundane audit tasks entirely automated, empower the team to focus on addressing the customer pain points and add significant value to clients – rather than spending countless hours with excel sheets, e-mails and manual procedures.</p>
+        </div>
+        <div class="image-container">
+            <img src="{% static 'images/features3.avif' %}" class="custom-image">
+        </div>
+    </div>
+    <div class="content">
+        <div class="image-container">
+            <img src="{% static 'images/features4.jpg' %}" class="custom-image">
+        </div>
+        <div>
+            <h1>Reduce Risks</h1>
+            <p>
+                With the emergence of more and more E-Governance in tax administration and the role of government in the regulatory and disciplinary framework for CAs, the risk of audit practice has substantially increased over the past few years. AssureAI, the premier audit software for chartered accountants in India, helps significantly reduce the risk of errors and omissions in statutory and tax audit assignments besides providing a seamless template-driven framework for compliance with auditing standards.
+            </p>     
+        </div>
+    </div>
+    <div class="content">
+        <div>
+            <h1>Enhance Efficiency</h1>
+            <p>Have clear visibility of the ongoing assignments and tasks through a ‘Task and Team Management’ dashboard designed exclusively for Practicing CAs. With the facility for automated creation of recurring tasks and follow-up tasks, always remain on top of your schedule, manage the target dates and due dates & monitor team performance with absolute ease.</p>
+        </div>
+        <div class="image-container">
+            <img src="{% static 'images/features5.jpg' %}" class="custom-image">
+        </div>
+    </div>
+</div>
+{% endblock %}
